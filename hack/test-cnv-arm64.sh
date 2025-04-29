@@ -58,6 +58,71 @@ skip_tests+=('rfe_id:273')
 skip_tests+=('test_id:1651')
 skip_tests+=('with cpu pinning enabled')
 
+skip_tests+=('Slirp Networking')
+skip_tests+=('with CPU spec')
+skip_tests+=('with TX offload disabled')
+skip_tests+=('with cni flannel and ptp plugin interface')
+skip_tests+=('with ovs-cni plugin')
+skip_tests+=('SRIOV')
+skip_tests+=('with EFI')
+skip_tests+=('Operator')
+skip_tests+=('GPU')
+skip_tests+=('DataVolume Integration')
+skip_tests+=('test_id:3468')
+skip_tests+=('test_id:3466')
+skip_tests+=('test_id:1015')
+skip_tests+=('rfe_id:393')
+skip_tests+=('test_id:4659')
+
+# Skipping VM Rename tests, which are failing due to a bug in KMP.
+skip_tests+=('test_id:4646')
+skip_tests+=('test_id:4647')
+skip_tests+=('test_id:4654')
+skip_tests+=('test_id:4655')
+skip_tests+=('test_id:4656')
+skip_tests+=('test_id:4657')
+skip_tests+=('test_id:4658')
+skip_tests+=('test_id:4659')
+
+# Skipping "Delete a VirtualMachineInstance with ACPI and 0 grace period seconds" due to a bug
+skip_tests+=('test_id:1652')
+
+# Skipping a few unrealiable tests
+skip_tests+=('test_id:1304')
+skip_tests+=('test_id:1616')
+skip_tests+=('test_id:1617')
+skip_tests+=('test_id:1618')
+skip_tests+=('test_id:1626')
+skip_tests+=('test_id:1651')
+skip_tests+=('test_id:1657')
+skip_tests+=('test_id:2188')
+skip_tests+=('test_id:2190')
+skip_tests+=('test_id:3007')
+skip_tests+=('test_id:3178')
+skip_tests+=('test_id:3180')
+skip_tests+=('test_id:3182')
+skip_tests+=('test_id:3184')
+skip_tests+=('test_id:3185')
+skip_tests+=('test_id:3199')
+skip_tests+=('test_id:3312')
+skip_tests+=('test_id:4119')
+skip_tests+=('test_id:4136')
+skip_tests+=('test_id:4622')
+skip_tests+=('test_id:6993')
+skip_tests+=('test_id:6311')
+skip_tests+=('test_id:7164')
+skip_tests+=('test_id:7679')
+skip_tests+=('test_id:1520')
+skip_tests+=('test_id:1521')
+skip_tests+=('test_id:1525')
+skip_tests+=('\[Serial\] Should leave a failed VMI')
+skip_tests+=('VirtualMachine crash loop backoff should backoff attempting to create a new VMI when')
+skip_tests+=('Using expand command')
+skip_tests+=('Using virtctl interface')
+skip_tests+=('repeately starting vmis')
+skip_tests+=('Prometheus Endpoints')
+
+
 
 skip_regex=$(printf '(%s)|' "${skip_tests[@]}")
 skip_arg=$(printf -- '--ginkgo.skip=%s' "${skip_regex:0:-1}")
@@ -73,7 +138,7 @@ ${TESTS_BINARY} \
     -junit-output="${ARTIFACT_DIR}/junit.functest.xml" \
     -kubeconfig="$KUBECONFIG" \
     -ginkgo.flake-attempts=3 \
-    -ginkgo.label-filter='(wg-arm64 && !(ACPI,requires-two-schedulable-nodes,cpumodel))' \
+    -ginkgo.label-filter='(cnv-network)' \
     -ginkgo.no-color \
     -ginkgo.seed=0 \
     -ginkgo.v \
