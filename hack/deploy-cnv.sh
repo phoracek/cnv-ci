@@ -2,6 +2,8 @@
 
 set -euxo pipefail
 PRODUCTION_RELEASE=${PRODUCTION_RELEASE:-false}
+CNV_CATALOG_IMAGE=brew.registry.redhat.io/rh-osbs/iib:960513
+CNV_SUBSCRIPTION_CHANNEL=nightly
 
 function cleanup() {
     rv=$?
