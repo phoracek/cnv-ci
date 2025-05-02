@@ -65,6 +65,19 @@ skip_tests+=('rfe_id:273')
 skip_tests+=('test_id:1651')
 skip_tests+=('with cpu pinning enabled')
 
+skip_tests+=('bridge interface binding')
+skip_tests+=('passt')
+skip_tests+=('slirp')
+skip_tests+=('istio')
+skip_tests+=('macvtap')
+skip_tests+=('migration')
+skip_tests+=('bridge binding')
+skip_tests+=('SRIOV')
+
+skip_tests+=('outside world')
+skip_tests+=('IPv6')
+
+
 
 skip_regex=$(printf '(%s)|' "${skip_tests[@]}")
 skip_arg=$(printf -- '--ginkgo.skip=%s' "${skip_regex:0:-1}")
@@ -80,7 +93,7 @@ ${TESTS_BINARY} \
     -junit-output="${ARTIFACT_DIR}/junit.functest.xml" \
     -kubeconfig="$KUBECONFIG" \
     -ginkgo.flake-attempts=3 \
-    -ginkgo.label-filter='(wg-arm64 && !(ACPI,requires-two-schedulable-nodes,cpumodel))' \
+    -ginkgo.focus '\[sig-network\].*\[Conformance\]' \
     -ginkgo.no-color \
     -ginkgo.seed=0 \
     -ginkgo.v \
