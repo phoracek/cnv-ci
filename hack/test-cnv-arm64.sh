@@ -74,11 +74,6 @@ skip_tests+=('migration')
 skip_tests+=('bridge binding')
 skip_tests+=('SRIOV')
 
-skip_tests+=('outside world')
-skip_tests+=('IPv6')
-
-
-
 skip_regex=$(printf '(%s)|' "${skip_tests[@]}")
 skip_arg=$(printf -- '--ginkgo.skip=%s' "${skip_regex:0:-1}")
 
@@ -93,7 +88,7 @@ ${TESTS_BINARY} \
     -junit-output="${ARTIFACT_DIR}/junit.functest.xml" \
     -kubeconfig="$KUBECONFIG" \
     -ginkgo.flake-attempts=3 \
-    -ginkgo.focus '\[sig-network\].*\[Conformance\]' \
+    -ginkgo.focus '\[sig-network\]' \
     -ginkgo.no-color \
     -ginkgo.seed=0 \
     -ginkgo.v \
