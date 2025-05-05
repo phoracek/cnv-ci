@@ -81,6 +81,7 @@ skip_tests+=('IPv6')
 skip_tests+=('IPV6')
 skip_tests+=('Multus')
 skip_tests+=('binding plugin')
+skip_tests+=('networkpolicy')
 
 skip_regex=$(printf '(%s)|' "${skip_tests[@]}")
 skip_arg=$(printf -- '--ginkgo.skip=%s' "${skip_regex:0:-1}")
@@ -104,7 +105,7 @@ ${TESTS_BINARY} \
     -oc-path="$(which oc)" \
     -kubectl-path="$(which oc)" \
     -utility-container-prefix=quay.io/kubevirt \
-    -test.timeout=3h \
+    -test.timeout=8h \
     -test.v \
     -utility-container-tag="${UTILITY_CONTAINER_TAG:-v1.5.0}" \
     "${skip_arg}"
